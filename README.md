@@ -67,6 +67,8 @@ GET /generate/world
   }
 }
 
+```
+
 ---
 
 ## 🛠️ Tech Stack
