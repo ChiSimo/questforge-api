@@ -10,8 +10,10 @@ A creative Node.js API that generates dynamic characters, weapons, and fantasy w
 
 - 🎭 Random Character Generator  
 - ⚔️ Weapon Generator  
-- 🧬 Full Character Builder (character + weapon combined)  
 - 🌍 Fantasy World Generator  
+- 📜 Quest Generator  
+- 🧬 Full Character Builder (character + weapon combined)  
+- 🗺️ Adventure Generator (character + weapon + world + quest combined)
 
 ---
 
@@ -39,11 +41,17 @@ GET /generate/character
 ### ⚔️ Generate Weapon
 GET /generate/weapon
 
+### 🌍 Generate World
+GET /generate/world
+
+### 📜 Generate Quest
+GET /generate/quest
+
 ### 🧬 Generate Full Character
 GET /generate/full-character
 
-### 🌍 Generate World
-GET /generate/world
+### 🗺️ Generate Adventure
+GET /generate/adventure
 
 
 ---
