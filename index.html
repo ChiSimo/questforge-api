@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuestForge Card Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111827;
+      color: #f9fafb;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      text-align: center;
+      color: #d1d5db;
+      margin-bottom: 2rem;
+    }
+
+    .controls {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    button {
+      background: #7c3aed;
+      color: white;
+      border: none;
+      padding: 0.9rem 1.4rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 16px;
+      padding: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      min-height: 220px;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      border-bottom: 1px solid #374151;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .label {
+      color: #a78bfa;
+      font-weight: bold;
+    }
+
+    .value {
+      color: #f9fafb;
+    }
+
+    .row {
+      margin-bottom: 0.55rem;
+      line-height: 1.4;
+    }
+
+    .empty {
+      text-align: center;
+      color: #9ca3af;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>⚔️ QuestForge</h1>
+  <p class="subtitle">Generate characters, weapons, worlds and quests as fantasy cards</p>
+
+  <div class="controls">
+    <button onclick="generateAdventure()">Generate Adventure</button>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>🎭 Character</h2>
+      <div id="character-card" class="empty">No character generated yet</div>
+    </div>
+
+    <div class="card">
+      <h2>⚔️ Weapon</h2>
+      <div id="weapon-card" class="empty">No weapon generated yet</div>
+    </div>
+
+    <div class="card">
+      <h2>🌍 World</h2>
+      <div id="world-card" class="empty">No world generated yet</div>
+    </div>
+
+    <div class="card">
+      <h2>📜 Quest</h2>
+      <div id="quest-card" class="empty">No quest generated yet</div>
+    </div>
+  </div>
+
+  <script>
+    async function generateAdventure() {
+      try {
+        const response = await fetch('http://localhost:3000/generate/adventure');
+        const data = await response.json();
+
+        document.getElementById('character-card').innerHTML = `
+          <div class="row"><span class="label">Name:</span> <span class="value">${data.character.name}</span></div>
+          <div class="row"><span class="label">Role:</span> <span class="value">${data.character.role}</span></div>
+          <div class="row"><span class="label">Power:</span> <span class="value">${data.character.power}</span></div>
+          <div class="row"><span class="label">Element:</span> <span class="value">${data.character.element}</span></div>
+        `;
+
+        document.getElementById('weapon-card').innerHTML = `
+          <div class="row"><span class="label">Name:</span> <span class="value">${data.weapon.name}</span></div>
+          <div class="row"><span class="label">Type:</span> <span class="value">${data.weapon.type}</span></div>
+          <div class="row"><span class="label">Element:</span> <span class="value">${data.weapon.element}</span></div>
+          <div class="row"><span class="label">Effect:</span> <span class="value">${data.weapon.effect}</span></div>
+          <div class="row"><span class="label">Rarity:</span> <span class="value">${data.weapon.rarity}</span></div>
+        `;
+
+        document.getElementById('world-card').innerHTML = `
+          <div class="row"><span class="label">Name:</span> <span class="value">${data.world.name}</span></div>
+          <div class="row"><span class="label">Theme:</span> <span class="value">${data.world.theme}</span></div>
+          <div class="row"><span class="label">Danger:</span> <span class="value">${data.world.danger}</span></div>
+          <div class="row"><span class="label">Rule:</span> <span class="value">${data.world.rule}</span></div>
+        `;
+
+        document.getElementById('quest-card').innerHTML = `
+          <div class="row"><span class="label">Title:</span> <span class="value">${data.quest.title}</span></div>
+          <div class="row"><span class="label">Objective:</span> <span class="value">${data.quest.objective}</span></div>
+          <div class="row"><span class="label">Difficulty:</span> <span class="value">${data.quest.difficulty}</span></div>
+          <div class="row"><span class="label">Reward:</span> <span class="value">${data.quest.reward}</span></div>
+        `;
+      } catch (error) {
+        alert('Something went wrong. Make sure your Node server is running on localhost:3000');
+        console.error(error);
+      }
+    }
+  </script>
+</body>
+</html>

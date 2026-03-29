@@ -96,10 +96,41 @@ node index.js
 Then open:
 http://localhost:3000
 
+```
 ---
 
+## 🎮 Frontend Preview
 
-💡 Future Improvements
+This project includes a UI that visualizes the generated data as fantasy cards.
+
+- Click the button → triggers API
+- Cards update dynamically
+- Simulates a game-like experience
+
+---
+## 📸 Screenshots
+
+### 🖥️ Interface
+Clean UI layout of the QuestForge generator.
+
+![UI](./screenshots/ui.png)
+
+---
+
+### 🎮 Before Generation
+Initial state before triggering the API.
+
+![Empty](./screenshots/empty.png)
+
+---
+
+### ⚡ Generated Adventure
+Example of dynamically generated character, weapon, world and quest.
+
+![Generated](./screenshots/generated.png)
+
+## 💡 Future Improvements
+
 🎯 Quest Generator
 🎮 Rarity system (weighted probabilities)
 🧾 Swagger / OpenAPI documentation
