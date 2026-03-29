@@ -118,13 +118,17 @@ Example of dynamically generated character, weapon, world and quest.
 
 ![Generated](./screenshots/generated.png)
 
-## 💡 Future Improvements
 
-🎯 Quest Generator
-🎮 Rarity system (weighted probabilities)
-🧾 Swagger / OpenAPI documentation
-🌐 Deployment (Render / Vercel)
-🎨 Custom user inputs (via query params)
+
+## ✨ Features
+
+- 🎭 Random Character Generator  
+- ⚔️ Weapon Generator  
+- 🌍 World Generator  
+- 📜 Quest Generator  
+- 🧬 Full Character Builder  
+- 🗺️ Complete Adventure Generator  
+
 
 ---
 
