@@ -6,17 +6,6 @@ A creative Node.js API that generates dynamic characters, weapons, and fantasy w
 
 ---
 
-## ✨ Features
-
-- 🎭 Random Character Generator  
-- ⚔️ Weapon Generator  
-- 🌍 Fantasy World Generator  
-- 📜 Quest Generator  
-- 🧬 Full Character Builder (character + weapon combined)  
-- 🗺️ Adventure Generator (character + weapon + world + quest combined)
-
----
-
 ## 🧠 Concept
 
 QuestForge is designed as a **creative engine** for generating fantasy content.
