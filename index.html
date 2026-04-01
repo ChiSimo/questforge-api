@@ -58,6 +58,17 @@
       padding: 1rem;
       box-shadow: 0 8px 20px rgba(0,0,0,0.25);
       min-height: 220px;
+      .card {
+  background: #1f2937;
+  border-radius: 12px;
+  padding: 20px;
+  
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
     }
 
     .card h2 {
@@ -120,44 +131,61 @@
   </div>
 
   <script>
-    async function generateAdventure() {
-      try {
-        const response = await fetch('http://localhost:3000/generate/adventure');
-        const data = await response.json();
+  async function generateAdventure() {
+    document.getElementById('character-card').innerHTML = "🎲 Rolling character...";
+    document.getElementById('weapon-card').innerHTML = "⚔️ Forging weapon...";
+    document.getElementById('world-card').innerHTML = "🌍 Generating world...";
+    document.getElementById('quest-card').innerHTML = "📜 Creating quest...";
 
-        document.getElementById('character-card').innerHTML = `
-          <div class="row"><span class="label">Name:</span> <span class="value">${data.character.name}</span></div>
-          <div class="row"><span class="label">Role:</span> <span class="value">${data.character.role}</span></div>
-          <div class="row"><span class="label">Power:</span> <span class="value">${data.character.power}</span></div>
-          <div class="row"><span class="label">Element:</span> <span class="value">${data.character.element}</span></div>
-        `;
+    await new Promise(resolve => setTimeout(resolve, 400));
 
-        document.getElementById('weapon-card').innerHTML = `
-          <div class="row"><span class="label">Name:</span> <span class="value">${data.weapon.name}</span></div>
-          <div class="row"><span class="label">Type:</span> <span class="value">${data.weapon.type}</span></div>
-          <div class="row"><span class="label">Element:</span> <span class="value">${data.weapon.element}</span></div>
-          <div class="row"><span class="label">Effect:</span> <span class="value">${data.weapon.effect}</span></div>
-          <div class="row"><span class="label">Rarity:</span> <span class="value">${data.weapon.rarity}</span></div>
-        `;
+    const rarityColors = {
+      common: "#9ca3af",
+      rare: "#3b82f6",
+      epic: "#a855f7",
+      legendary: "#f59e0b"
+    };
 
-        document.getElementById('world-card').innerHTML = `
-          <div class="row"><span class="label">Name:</span> <span class="value">${data.world.name}</span></div>
-          <div class="row"><span class="label">Theme:</span> <span class="value">${data.world.theme}</span></div>
-          <div class="row"><span class="label">Danger:</span> <span class="value">${data.world.danger}</span></div>
-          <div class="row"><span class="label">Rule:</span> <span class="value">${data.world.rule}</span></div>
-        `;
+    try {
+      const response = await fetch('http://localhost:3000/generate/adventure');
+      const data = await response.json();
 
-        document.getElementById('quest-card').innerHTML = `
-          <div class="row"><span class="label">Title:</span> <span class="value">${data.quest.title}</span></div>
-          <div class="row"><span class="label">Objective:</span> <span class="value">${data.quest.objective}</span></div>
-          <div class="row"><span class="label">Difficulty:</span> <span class="value">${data.quest.difficulty}</span></div>
-          <div class="row"><span class="label">Reward:</span> <span class="value">${data.quest.reward}</span></div>
-        `;
-      } catch (error) {
-        alert('Something went wrong. Make sure your Node server is running on localhost:3000');
-        console.error(error);
-      }
+      document.getElementById('character-card').innerHTML = `
+        <div class="row"><span class="label">Name:</span> <span class="value">${data.character.name}</span></div>
+        <div class="row"><span class="label">Role:</span> <span class="value">${data.character.role}</span></div>
+        <div class="row"><span class="label">Power:</span> <span class="value">${data.character.power}</span></div>
+        <div class="row"><span class="label">Element:</span> <span class="value">${data.character.element}</span></div>
+      `;
+
+      document.getElementById('weapon-card').innerHTML = `
+        <div class="row"><span class="label">Name:</span> <span class="value">${data.weapon.name}</span></div>
+        <div class="row"><span class="label">Type:</span> <span class="value">${data.weapon.type}</span></div>
+        <div class="row"><span class="label">Element:</span> <span class="value">${data.weapon.element}</span></div>
+        <div class="row"><span class="label">Effect:</span> <span class="value">${data.weapon.effect}</span></div>
+        <div class="row">
+          <span class="label">Rarity:</span>
+          <span class="value" style="color:${rarityColors[data.weapon.rarity]}">${data.weapon.rarity}</span>
+        </div>
+      `;
+
+      document.getElementById('world-card').innerHTML = `
+        <div class="row"><span class="label">Name:</span> <span class="value">${data.world.name}</span></div>
+        <div class="row"><span class="label">Theme:</span> <span class="value">${data.world.theme}</span></div>
+        <div class="row"><span class="label">Danger:</span> <span class="value">${data.world.danger}</span></div>
+        <div class="row"><span class="label">Rule:</span> <span class="value">${data.world.rule}</span></div>
+      `;
+
+      document.getElementById('quest-card').innerHTML = `
+        <div class="row"><span class="label">Title:</span> <span class="value">${data.quest.title}</span></div>
+        <div class="row"><span class="label">Objective:</span> <span class="value">${data.quest.objective}</span></div>
+        <div class="row"><span class="label">Difficulty:</span> <span class="value">${data.quest.difficulty}</span></div>
+        <div class="row"><span class="label">Reward:</span> <span class="value">${data.quest.reward}</span></div>
+      `;
+    } catch (error) {
+      console.error(error);
+      alert('Something went wrong. Check console.');
     }
-  </script>
+  }
+</script>
 </body>
 </html>
